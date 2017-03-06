@@ -46,7 +46,7 @@ bool ConjugationBackendMode::setTestEntry(TestEntry* current)
     }
 
     data.tense = m_currentTense;
-    m_conjugation = m_current->entry()->translation(m_current->languageTo())->getConjugation(m_currentTense);
+    m_conjugation = m_current->entry()->translation(m_current->languageTo())->conjugation(m_currentTense);
     m_pronounFlags = current->conjugationPronouns();
 
     data.questionInfinitive = m_current->entry()->translation(m_current->languageFrom())->text();
@@ -142,7 +142,7 @@ void ConjugationBackendMode::updateGrades()
     foreach(const KEduVocWordFlags & key, m_pronounFlags) {
         KEduVocTranslation *translation = m_current->entry()->translation(m_current->languageTo());
         if (translation) {
-            KEduVocConjugation conjugationToUpdate = translation->getConjugation(m_currentTense);
+            KEduVocConjugation conjugationToUpdate = translation->conjugation(m_currentTense);
             conjugationToUpdate.conjugation(key).incPracticeCount();
             conjugationToUpdate.conjugation(key).setPracticeDate(QDateTime::currentDateTime());
 

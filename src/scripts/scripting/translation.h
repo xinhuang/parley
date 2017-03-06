@@ -321,7 +321,7 @@ public slots:
 
     /** returns multiple choice if available */
     QStringList multipleChoice() {
-        return m_translation->getMultipleChoice();
+        return m_translation->multipleChoice();
     }
 
     /** returns a string list with the available conjugation tenses */
