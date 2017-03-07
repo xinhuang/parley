@@ -12,6 +12,7 @@
  ***************************************************************************/
 
 #include "audiobutton.h"
+#include "../parleymainwindow.h"
 
 #include <KLocalizedString>
 
@@ -44,7 +45,9 @@ void AudioButton::playAudio()
             m_player->stop();
         }
     }
-    m_player->setMedia(m_url);
+    QString docDir = ParleyMainWindow::instance()->parleyDocument()->document()->url().adjusted(QUrl::RemoveFilename).toLocalFile();
+    QUrl absUrl = QUrl::fromLocalFile(docDir + m_url.toLocalFile());
+    m_player->setMedia(absUrl);
     m_player->setVolume(50);
     m_player->play();
 }

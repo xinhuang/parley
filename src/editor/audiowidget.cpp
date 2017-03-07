@@ -14,6 +14,7 @@
  ***************************************************************************/
 
 #include "audiowidget.h"
+#include "../parleymainwindow.h"
 
 #include <keduvocexpression.h>
 
@@ -84,7 +85,9 @@ void AudioWidget::playAudio()
             slotPlaybackFinished();
         }
     }
-    m_player->setMedia(soundFile);
+    QString docDir = ParleyMainWindow::instance()->parleyDocument()->document()->url().adjusted(QUrl::RemoveFilename).toLocalFile();
+    QUrl absUrl = QUrl::fromLocalFile(docDir + soundFile.toLocalFile());
+    m_player->setMedia(absUrl);
     m_player->setVolume(50);
 
     playButton->setIcon(QIcon::fromTheme(QStringLiteral("media-playback-stop")));
