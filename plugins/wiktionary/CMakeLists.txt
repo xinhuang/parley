@@ -18,6 +18,7 @@ install(FILES
     DESTINATION ${KDE_INSTALL_DATADIR}/parley/plugins/mwclient)
 
 install(FILES
+    mwclient/six/__init__.py
     mwclient/six/LICENSE
     mwclient/six/README
     mwclient/six/six.py
