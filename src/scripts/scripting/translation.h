@@ -22,8 +22,10 @@
 #include "keduvocwordtype.h"
 #include "expression.h"
 #include "text.h"
+#include "parleymainwindow.h"
 
 #include <QObject>
+#include <QDir>
 
 namespace Scripting
 {
@@ -212,7 +214,12 @@ public:
     /* set the sound url for this translation
      * @param url               url of the sound file */
     void setSoundUrl(const QString &url) {
-        m_translation->setSoundUrl(QUrl(url));
+        KEduVocDocument* doc = ParleyMainWindow::instance()->parleyDocument()->document();
+        QUrl docDirUrl = doc->url().adjusted(QUrl::RemoveFilename);
+        QDir dir(docDirUrl.toLocalFile());
+        QUrl urlString = QUrl::fromLocalFile(dir.relativeFilePath(url));
+
+        m_translation->setSoundUrl(QUrl(urlString));
     }
 
     /* get the image url for this translation if it exists */
